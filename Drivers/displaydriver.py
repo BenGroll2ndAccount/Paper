@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from drawcalls import *
+from Drivers.drawcalls import *
 
 class AutoFlushDisplayDriver(ABC): #DisplayDriver that draws each call seperately after another. Simpler Logic, but in most cases the slower variant
     @abstractmethod
@@ -7,26 +7,26 @@ class AutoFlushDisplayDriver(ABC): #DisplayDriver that draws each call seperatel
         pass
 
     @abstractmethod
-    def __Circle(circle : udraw_Circle) -> None:
+    def _Circle(circle : udraw_Circle) -> None:
         raise NotImplementedError
 
     @abstractmethod
-    def __Pixel(pixel : udraw_Pixel) -> None:
+    def _Pixel(pixel : udraw_Pixel) -> None:
         raise NotImplementedError
 
     @abstractmethod
-    def __Line(line : udraw_Line) -> None:
+    def _Line(line : udraw_Line) -> None:
         raise NotImplementedError
 
     @abstractmethod
-    def __Rectangle(rect : udraw_Rectangle) -> None:
+    def _Rectangle(rect : udraw_Rectangle) -> None:
         raise NotImplementedError
 
     @abstractmethod
-    def __Text(text : udraw_Text) -> None:
+    def _Text(text : udraw_Text) -> None:
         raise NotImplementedError
 
-    def __draw(self, drawcalls : list) -> None:
+    def _draw(self, drawcalls : list) -> None:
         for call in drawcalls:
             if hasattr(self, "__" +  call.__class__.__name__.split("_")[1]):
                 getattr(self, "__" + call.__class__.__name__.split("_")[1])(call)
@@ -41,36 +41,36 @@ class QueueDisplayDriver(ABC):
         raise NotImplementedError
         
     @abstractmethod
-    def __Circle(circle : udraw_Circle):
+    def _Circle(circle : udraw_Circle):
         raise NotImplementedError
     
     @abstractmethod
-    def __Pixel(pixel : udraw_Pixel):
+    def _Pixel(pixel : udraw_Pixel):
         raise NotImplementedError
     
     @abstractmethod
-    def __Line(line : udraw_Line):
+    def _Line(line : udraw_Line):
         raise NotImplementedError
     
     @abstractmethod
-    def __Rectangle(rect : udraw_Rectangle):
+    def _Rectangle(rect : udraw_Rectangle):
         raise NotImplementedError
     
     @abstractmethod
-    def __Text(text : udraw_Text):
+    def _Text(text : udraw_Text):
         raise NotImplementedError
     
     @abstractmethod
-    def __Update():
+    def _Update():
         raise NotImplementedError
 
-    def __draw(self, drawcalls : list) -> list:
+    def _draw(self, drawcalls : list) -> list:
         for call in drawcalls:
-            if hasattr(self, "__" +  call.__class__.__name__.split("_")[1]):
-                getattr(self, "__" + call.__class__.__name__.split("_")[1])(call)
+            if hasattr(self, "_" +  call.__class__.__name__.split("_")[1]):
+                getattr(self, "_" + call.__class__.__name__.split("_")[1])(call)
             else:
                 raise ValueError(self.__class__.__name__ + " has no function " + call.__class__.__name__.split("_")[1])
-        self.__Update()
+        self._Update()
             
 
             

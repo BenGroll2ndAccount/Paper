@@ -1,7 +1,6 @@
 from Drivers.displaydriver import QueueDisplayDriver
-import displaydriver
-import displaylayout
-from drawcalls import *
+import Drivers.displaylayout
+from Drivers.drawcalls import *
 # graphics.py
 
 """Simple object oriented graphics library  
@@ -1018,32 +1017,32 @@ update()
 if __name__ == "__main__":
     test()
 
-class DisplaySimDriver(displaydriver.QueueDisplayDriver):
-    def __init__(self, layout : displaylayout.DisplayLayout, zoom : float = 1.0, title : str = "DisplaySim"):
+class DisplaySimDriver(Drivers.displaydriver.QueueDisplayDriver):
+    def __init__(self, layout : Drivers.displaylayout.DisplayLayout, zoom : float = 1.0, title : str = "DisplaySim"):
         self.display = GraphWin(title = title, width = layout.width, height = layout.height, autoflush = False)
 
-    def __Circle(self, circle : udraw_Circle):
+    def _Circle(self, circle : udraw_Circle):
         raise NotImplementedError
     
-    def __Pixel(self, pixel : udraw_Pixel):
+    def _Pixel(self, pixel : udraw_Pixel):
         self.display.plotPixel(x = pixel.position.x, y = pixel.position.y, color = pixel)
     
-    def __Line(self, line : udraw_Line):
+    def _Line(self, line : udraw_Line):
         raise NotImplementedError
     
-    def __Rectangle(self, rect : udraw_Rectangle):
+    def _Rectangle(self, rect : udraw_Rectangle):
         raise NotImplementedError
     
-    def __Text(self, text : udraw_Text):
+    def _Text(self, text : udraw_Text):
         raise NotImplementedError
     
-    def __Update(self):
+    def _Update(self):
         raise NotImplementedError
 
-    def __draw(self, drawcalls : list) -> list:
+    def _draw(self, drawcalls : list) -> list:
         for call in drawcalls:
-            if hasattr(self, "__" +  call.__class__.__name__.split("_")[1]):
-                getattr(self, "__" + call.__class__.__name__.split("_")[1])(call)
+            if hasattr(self, "_" +  call.__class__.__name__.split("_")[1]):
+                getattr(self, "_" + call.__class__.__name__.split("_")[1])(call)
             else:
                 raise ValueError(self.__class__.__name__ + " has no function " + call.__class__.__name__.split("_")[1])
         self.__Update()
