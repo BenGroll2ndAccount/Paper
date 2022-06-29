@@ -1,2 +1,2 @@
-# P4p3r
+# Paper
 Paper Framework to create GUI-Applications with Python
