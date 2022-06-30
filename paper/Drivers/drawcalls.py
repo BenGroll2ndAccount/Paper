@@ -1,4 +1,5 @@
-from helperclasses import *
+from paper.helperclasses import *
+from paper.Drivers.displaysimdriver import *
 
 class udraw_Pixel():
     def __init__(self, position : uPoint, highlight : bool = True):

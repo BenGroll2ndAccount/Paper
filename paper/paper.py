@@ -1,7 +1,8 @@
-from fileinput import filename
 import json
 import os
 class Paper():
+    # Data Management Functions, directly accessing the jsons 
+
     def jget(self, filename : str, setting_name : str):
         with open(str(os.path.dirname(os.path.abspath(__file__)))+ r"/Files/" + filename + ".json", "r") as jfile:
             try:
@@ -38,6 +39,7 @@ class Paper():
             directory : dict = json.loads(jfile.read())
             return directory.keys()
 
+    #Init function
     def __init__(self, driver, custommainloopactions = None):
         self.driver = driver
         self.jsonprefixes = []
@@ -49,9 +51,7 @@ class Paper():
         self.custommainloopactions = custommainloopactions
         self.loop()
         
-    def changevalue(self, filename : str, name : str, value):
-        self.jset(filename = filename, setting_name=name, setting_value=value)
-
+    # Main loop that's entered after Initialization has finished
     def loop(self):
         attributes = self.__dict__
         while True:

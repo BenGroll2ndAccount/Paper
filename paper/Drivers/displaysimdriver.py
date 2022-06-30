@@ -1,6 +1,6 @@
-from Drivers.displaydriver import QueueDisplayDriver
-import Drivers.displaylayout
-from Drivers.drawcalls import *
+from paper.Drivers.displaydriver import QueueDisplayDriver
+from paper.Drivers.displaylayout import *
+from paper.Drivers.drawcalls import *
 # graphics.py
 
 """Simple object oriented graphics library  
@@ -1017,8 +1017,8 @@ update()
 if __name__ == "__main__":
     test()
 
-class DisplaySimDriver(Drivers.displaydriver.QueueDisplayDriver):
-    def __init__(self, layout : Drivers.displaylayout.DisplayLayout, zoom : float = 1.0, title : str = "DisplaySim"):
+class DisplaySimDriver(QueueDisplayDriver):
+    def __init__(self, layout : DisplayLayout, zoom : float = 1.0, title : str = "DisplaySim"):
         self.display = GraphWin(title = title, width = layout.width, height = layout.height, autoflush = False)
 
     def _Circle(self, circle : udraw_Circle):

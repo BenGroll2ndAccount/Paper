@@ -1,5 +1,4 @@
 
-from Drivers.graphics import *
 
 class uPoint():
     def __init__(self, x : int, y : int):
@@ -7,9 +6,6 @@ class uPoint():
         self.y = y
         if x == None or y == None:
             raise ValueError("Node needs both, x and y, specified.", self.__class__.__name__)
-
-    def to_point(self) -> Point:
-        return Point(x = self.x, y = self.y)
 
     def out(self):
         return "(" + str(self.x) + "|" + str(self.y) + ")"

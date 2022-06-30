@@ -1,19 +1,13 @@
-from Drivers.displaylayout import DisplayLayout
-import paper
-from Drivers.displaysimdriver import * 
+from paper.lib import *
 
-
-
-wallpapersystem = paper.Paper(
+wallpapersystem = Paper(
     driver = DisplaySimDriver(
-        layout=DisplayLayout(
-            200,
-            [0, 0, 1, 1],
-            [0, 0, 1, 1],
-            [0, 0, 1, 1]
+        layout=DisplayLayout.simple(
+            width = 300,
+            height = 100,
+            startwidget = 1
         )
-        )
+        ),
+    
     )
-
-
-input()
+  
